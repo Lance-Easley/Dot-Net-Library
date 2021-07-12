@@ -1,13 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DotNetLibrary.Models
+namespace DotNetLibrary.Dtos
 {
-    public class Book
+    public class BookCreateDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
@@ -21,6 +18,6 @@ namespace DotNetLibrary.Models
         public string Description { get; set; }
 
         [Required]
-        public string PublishDate { get; set; } // "mm/dd/yyyy"
+        public string PublishDate { get; set; }
     }
 }

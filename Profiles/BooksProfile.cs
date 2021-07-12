@@ -9,6 +9,7 @@ namespace DotNetLibrary.Profiles
         public BooksProfile()
         {
             CreateMap<Book, BookReadDto>();
+            CreateMap<BookCreateDto, Book>();
         }
     }
 }

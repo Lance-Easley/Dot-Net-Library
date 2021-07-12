@@ -30,7 +30,7 @@ namespace DotNetLibrary.Controllers
         }
 
         //GET api/book/{id}
-        [HttpGet("book/{id}")]
+        [HttpGet("book/{id}", Name="GetBookById")]
         public ActionResult <BookReadDto> GetBookById(int id)
         {
             var book = _repository.GetBookById(id);
@@ -40,6 +40,20 @@ namespace DotNetLibrary.Controllers
             }
 
             return NotFound();
+        }
+
+        //POST api/book
+        [HttpPost("book")]
+        public ActionResult <BookReadDto> CreateBook(BookCreateDto bookCreateDto)
+        {
+            var bookModel = _mapper.Map<Book>(bookCreateDto);
+
+            _repository.CreateBook(bookModel);
+            _repository.SaveChanges();
+
+            var bookReadDto = _mapper.Map<BookReadDto>(bookModel);
+
+            return CreatedAtRoute(nameof(GetBookById), new {Id = bookReadDto.Id}, bookReadDto);
         }
     }
 }
