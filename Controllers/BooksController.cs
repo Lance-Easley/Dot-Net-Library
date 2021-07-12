@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using AutoMapper;
 using DotNetLibrary.Data;
+using DotNetLibrary.Dtos;
 using DotNetLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,28 +12,34 @@ namespace DotNetLibrary.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookRepo _repository;
+        private readonly IMapper _mapper;
 
-        public BooksController(IBookRepo repository)    
+        public BooksController(IBookRepo repository, IMapper mapper)    
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         //GET api/books
         [HttpGet("books")]
-        public ActionResult <IEnumerable<Book>> GetAllBooks()
+        public ActionResult <IEnumerable<BookReadDto>> GetAllBooks()
         {
             var books = _repository.GetAllBooks();
 
-            return Ok(books);
+            return Ok(_mapper.Map<IEnumerable<BookReadDto>>(books));
         }
 
         //GET api/book/{id}
         [HttpGet("book/{id}")]
-        public ActionResult <Book> GetBookById(int id)
+        public ActionResult <BookReadDto> GetBookById(int id)
         {
             var book = _repository.GetBookById(id);
 
-            return Ok(book);
+            if (book != null) {
+                return Ok(_mapper.Map<BookReadDto>(book));
+            }
+
+            return NotFound();
         }
     }
 }
