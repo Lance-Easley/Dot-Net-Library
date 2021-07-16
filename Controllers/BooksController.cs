@@ -74,5 +74,22 @@ namespace DotNetLibrary.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/book/{id}
+        [HttpDelete("book/{id}")]
+        public ActionResult DeleteBook(int id)
+        {
+            var bookModelFromRepo = _repository.GetBookById(id);
+
+            if (bookModelFromRepo == null)
+            {
+                return NotFound();
+            } 
+
+            _repository.DeleteBook(bookModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

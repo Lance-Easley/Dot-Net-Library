@@ -11,6 +11,11 @@ namespace DotNetLibrary.Data
             throw new NotImplementedException();
         }
 
+        public void DeleteBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Book> GetAllBooks()
         {
             var books = new List<Book>

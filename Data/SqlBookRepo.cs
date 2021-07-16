@@ -21,8 +21,11 @@ namespace DotNetLibrary.Data
             }
 
             _context.Books.Add(book);
+        }
 
-            _context.SaveChanges();
+        public void DeleteBook(Book book)
+        {
+            _context.Books.Remove(book);
         }
 
         public IEnumerable<Book> GetAllBooks()
