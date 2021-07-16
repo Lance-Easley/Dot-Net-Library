@@ -18,6 +18,7 @@ namespace DotNetLibrary.Dtos
         public string Description { get; set; }
 
         [Required]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Date must be in MM/DD/YYYY format")]
         public string PublishDate { get; set; }
     }
 }

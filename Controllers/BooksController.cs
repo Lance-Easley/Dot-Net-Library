@@ -55,5 +55,24 @@ namespace DotNetLibrary.Controllers
 
             return CreatedAtRoute(nameof(GetBookById), new {Id = bookReadDto.Id}, bookReadDto);
         }
+
+        //PUT api/book/{id}
+        [HttpPut("book/{id}")]
+        public ActionResult UpdateBook(int id, BookUpdateDto bookUpdateDto)
+        {
+            var bookModelFromRepo = _repository.GetBookById(id);
+
+            if (bookModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(bookUpdateDto, bookModelFromRepo);
+
+            _repository.UpdateBook(bookModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
