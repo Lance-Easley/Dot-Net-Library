@@ -40,6 +40,18 @@ namespace DotNetLibrary
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IBookRepo, SqlBookRepo>();
+
+            services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAllHeaders",
+                            builder =>
+                        {
+                                builder.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                            });
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +67,8 @@ namespace DotNetLibrary
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowAllHeaders");
 
             app.UseAuthorization();
 
