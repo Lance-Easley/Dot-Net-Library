@@ -21,6 +21,7 @@ namespace DotNetLibrary.Models
         public string Description { get; set; }
 
         [Required]
+        [StringLength(10)]
         public string PublishDate { get; set; } // "mm/dd/yyyy"
     }
 }

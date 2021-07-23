@@ -37,7 +37,8 @@ namespace DotNetLibrary.Migrations
 
                     b.Property<string>("PublishDate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Title")
                         .IsRequired()

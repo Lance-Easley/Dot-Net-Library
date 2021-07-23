@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetLibrary.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20210712212006_DateModification")]
-    partial class DateModification
+    [Migration("20210723193037_ValidationChanges")]
+    partial class ValidationChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,8 @@ namespace DotNetLibrary.Migrations
 
                     b.Property<string>("PublishDate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Title")
                         .IsRequired()
