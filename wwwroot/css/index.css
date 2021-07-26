@@ -1,0 +1,33 @@
+.validationMessage {
+   color: red;
+   font-size: 0.8em;
+   margin-top: 0.2em;
+}
+
+input.error {
+   border: 1px solid red;
+}
+
+.red {
+   color: red;
+}
+
+.title-row {
+   width: 15%;
+}
+
+.author-row {
+   width: 15%;
+}
+
+.description-row {
+   width: 50%;
+}
+
+.date-row {
+   width: 15%;
+}
+
+.data-entry {
+   word-wrap: break-all;
+}
