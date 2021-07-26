@@ -31,6 +31,9 @@ namespace DotNetLibrary
             services.AddDbContext<BookContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("BookConnection")));
 
+            services.AddDbContext<LogContext>(opt => opt.UseSqlServer
+            (Configuration.GetConnectionString("LogConnection")));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -40,6 +43,7 @@ namespace DotNetLibrary
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IBookRepo, SqlBookRepo>();
+            services.AddScoped<ILogRepo, SqlLogRepo>();
 
             services.AddCors(options =>
                 {

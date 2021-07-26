@@ -1,6 +1,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
+using DotNetLibrary.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -11,39 +13,48 @@ namespace DotNetLibrary
     public class RequestLogMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
         private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager;
-        public RequestLogMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        private readonly IMapper _mapper;
+        public RequestLogMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IMapper mapper)
         {
             _next = next;
-            _logger = loggerFactory.CreateLogger<RequestLogMiddleware>();
             _recyclableMemoryStreamManager = new RecyclableMemoryStreamManager();
+            _mapper = mapper;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context, ILogRepo repo)
         {
-            await LogRequest(context);
+            await LogRequest(context, repo);
             await _next(context);
         }  
 
-        private async Task LogRequest(HttpContext context)
+        private async Task LogRequest(HttpContext context, ILogRepo repo)
         {
             context.Request.EnableBuffering();
 
             await using var requestStream = _recyclableMemoryStreamManager.GetStream();
             await context.Request.Body.CopyToAsync(requestStream);
 
-            string responseText = $"[{context.Request.Method}] " +
-                                $"FullPath: {context.Request.Host}{context.Request.Path}";
+            if (context.Request.Path != "/logs") {
+                LogCreateDto requestLog = new LogCreateDto{
+                    Method=$"{context.Request.Method}", 
+                    Host=$"{context.Request.Host}",
+                    Path=$"{context.Request.Path}",
+                    RequestBody=$"{ReadStreamInChunks(requestStream)}",
+                    Time=System.DateTime.Now
+                    };
 
-            if (context.Request.Body.Length > 0) {
-                responseText += $"\nRequest Body: {ReadStreamInChunks(requestStream)}";
+                var logModel = _mapper.Map<Log>(requestLog);
+
+                repo.CreateLog(logModel);
+                repo.SaveChanges();
             }
 
-            _logger.LogInformation(responseText);
+
             context.Request.Body.Position = 0;
         }
-
+        
+        // Helper Method
         private static string ReadStreamInChunks(Stream stream)
         {
             const int readChunkBufferLength = 4096;
