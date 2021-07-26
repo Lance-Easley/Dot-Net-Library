@@ -11,4 +11,5 @@ For now, the project only runs locally, along with a local Microsoft SQL Server 
 Once a SQL server is running, you can run the project by navigating to the folder in a terminal and running `dotnet run`.
 After that, the API boots up and will respond to HTTP requests.
 
-For a user-friendly interaction with the API, I have a [Front-end Project](https://github.com/Lance-Easley/DNL-Front-End) built separately.
+For a user-friendly interaction with the API, navigate to the base URL. 
+You will be greeted with a list of all books and buttons to interact with the books.
