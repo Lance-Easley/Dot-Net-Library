@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DotNetLibrary.Models;
 
 namespace DotNetLibrary.Data
 {

@@ -1,4 +1,3 @@
-using DotNetLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetLibrary.Data

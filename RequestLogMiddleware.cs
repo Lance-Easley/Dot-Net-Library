@@ -1,6 +1,5 @@
 using System.IO;
 using System.Threading.Tasks;
-using System.Web;
 using AutoMapper;
 using DotNetLibrary.Data;
 using Microsoft.AspNetCore.Builder;

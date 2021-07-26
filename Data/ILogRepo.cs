@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DotNetLibrary.Models;
 
 namespace DotNetLibrary.Data
 {
