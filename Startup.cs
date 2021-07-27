@@ -63,7 +63,7 @@ namespace DotNetLibrary
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DotNetLibrary v1"));
             }
 
-            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
+            app.UseDefaultFiles();
             
             app.UseStaticFiles();
 

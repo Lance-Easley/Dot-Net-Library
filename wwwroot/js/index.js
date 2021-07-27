@@ -75,8 +75,6 @@ function DNLViewModel() {
 
     self.handleAddSubmit = function() {
         if (self.addFormFilled()) {
-            console.log("before:")
-            console.log(self.bookInventory())
 
             const newBook = {
                 "title": self.title(),
@@ -85,7 +83,7 @@ function DNLViewModel() {
                 "publishDate": self.date()
             }
         
-            fetch('https://localhost:5001/api/book', {
+            fetch('https://localhost:5001/api/book/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newBook)
@@ -110,9 +108,6 @@ function DNLViewModel() {
                     .then(response => response.json())
                     .then(data => self.bookInventory(data));
             }, updateDelay)
-    
-            console.log("after:")
-            console.log(self.bookInventory())
         }
 
         $('#addBookModel').modal('hide');

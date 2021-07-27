@@ -34,7 +34,7 @@ namespace DotNetLibrary
             await using var requestStream = _recyclableMemoryStreamManager.GetStream();
             await context.Request.Body.CopyToAsync(requestStream);
 
-            if (context.Request.Path != "/logs") {
+            if (context.Request.Path != "/api/logs/") {
                 LogCreateDto requestLog = new LogCreateDto{
                     Method=$"{context.Request.Method}", 
                     Host=$"{context.Request.Host}",

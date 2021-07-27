@@ -1,0 +1,33 @@
+.data-entry {
+word-wrap: break-all;
+}
+
+.time-row {
+    width: 16%;
+}
+
+.method-row {
+    width: 10%;
+}
+
+.host-row {
+    width: 14%;
+}
+
+.path-row {
+    width: 10%;
+}
+
+.request-body-row {
+    width: 50%;
+}
+
+.header {
+    background-color: white;
+    position: sticky;
+    top: 0;
+}
+
+.log-table {
+    overflow-x: scroll;
+}

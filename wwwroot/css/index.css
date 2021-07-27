@@ -31,3 +31,13 @@ input.error {
 .data-entry {
    word-wrap: break-all;
 }
+
+.header {
+   background-color: white;
+   position: sticky;
+   top: 0;
+}
+
+.book-table {
+   overflow-x: scroll;
+}

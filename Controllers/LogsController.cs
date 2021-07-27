@@ -2,11 +2,13 @@ using AutoMapper;
 using DotNetLibrary.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace DotNetLibrary.Controllers
 {
-    [Controller]
-    public class LogsController : Controller
+    [Route("api")]
+    [ApiController]
+    public class LogsController : ControllerBase
     {
         private readonly ILogRepo _repository;
         private readonly IMapper _mapper;
@@ -19,25 +21,11 @@ namespace DotNetLibrary.Controllers
 
         //GET logs
         [HttpGet("logs")]
-        public string Index()
+        public ActionResult <IEnumerable<LogReadDto>> GetAllBooks()
         {
             var logs = _repository.GetAllLogs();
 
-            string logString = "";
-
-            string[] filters = HttpContext.Request.Query["filter"];
-
-            foreach (Log log in logs) {
-                if (!StringInArray(filters, log.Method)) {
-                    logString += $"[{log.Method}] {log.Time} FROM: {log.Host}{log.Path}\n";
-
-                    if (log.RequestBody.Length > 0) {
-                        logString += $"    Body: {log.RequestBody}\n";
-                    }
-                }
-            }
-
-            return logString;
+            return Ok(_mapper.Map<IEnumerable<LogReadDto>>(logs));
         }
 
         public static bool StringInArray(string[] array, string check) {
