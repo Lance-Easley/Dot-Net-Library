@@ -13,3 +13,6 @@ After that, the API boots up and will respond to HTTP requests.
 
 For a user-friendly interaction with the API, navigate to the base URL. 
 You will be greeted with a list of all books and buttons to interact with the books.
+
+All interactions with the API are logged to a database table. 
+To view these logs, navigate to `/logs` in the url.
