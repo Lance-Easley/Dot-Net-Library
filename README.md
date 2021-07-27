@@ -15,4 +15,8 @@ For a user-friendly interaction with the API, navigate to the base URL.
 You will be greeted with a list of all books and buttons to interact with the books.
 
 All interactions with the API are logged to a database table. 
-To view these logs, navigate to `/logs` in the url.
+To view these logs, click on `Logs` in the navbar.
+The logs page contains a list of all log entries.
+To filter through all the logs, the navbar has a `filter` dropdown, which allows you to select only the log methods you want to see.
+
+To go back to the list of books, simply click on `Books` in the navbar.
