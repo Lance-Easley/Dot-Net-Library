@@ -17,11 +17,20 @@ function DNLViewModel() {
         let result = []
 
         for (const entry of self.logs()) {
-            if (self.filter[entry.method.toLowerCase()]()) {
+            // If method has a filter observable
+            if (self.filter.hasOwnProperty(entry.method.toLowerCase())) {
+                if (self.filter[entry.method.toLowerCase()]()) {
+                    var formattedEntry = entry
+                    formattedEntry.time = formattedEntry.time
+                        .substring(0,19)
+                        .replace("T", " ")
+                    result.push(formattedEntry)
+                }
+            } else {
                 var formattedEntry = entry
-                formattedEntry.time = formattedEntry.time
-                    .substring(0,19)
-                    .replace("T", " ")
+                    formattedEntry.time = formattedEntry.time
+                        .substring(0,19)
+                        .replace("T", " ")
                 result.push(formattedEntry)
             }
         }
