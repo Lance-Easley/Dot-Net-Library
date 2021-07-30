@@ -38,7 +38,7 @@ function DNLViewModel() {
         return result
     })
     
-    fetch('https://localhost:5001/api/logs/')
+    fetch('http://localhost:8080/api/logs/')
         .then(response => response.json())
         .then(data => {
             self.logs(data)

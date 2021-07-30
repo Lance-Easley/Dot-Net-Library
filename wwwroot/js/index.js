@@ -8,7 +8,7 @@ function DNLViewModel() {
 
     self.nextDbId = ko.observable(0)
     
-    fetch('https://localhost:5001/api/books/')
+    fetch('http://localhost:8080/api/books/')
         .then(response => response.json())
         .then(data => {
             self.bookInventory(data)
@@ -21,7 +21,7 @@ function DNLViewModel() {
     self.deleteBook = function(data, event) {
         var idToRemove = event.target.getAttribute("item-id")
         
-        fetch('https://localhost:5001/api/book/' + idToRemove + '/', {
+        fetch('http://localhost:8080/api/book/' + idToRemove + '/', {
             method: 'DELETE'
         })
 
@@ -34,7 +34,7 @@ function DNLViewModel() {
 
         // Ensure bookInventory synced with database
         setTimeout(() => {
-            fetch('https://localhost:5001/api/books/')
+            fetch('http://localhost:8080/api/books/')
                 .then(response => response.json())
                 .then(data => self.bookInventory(data));
         }, updateDelay)
@@ -83,7 +83,7 @@ function DNLViewModel() {
                 "publishDate": self.date()
             }
         
-            fetch('https://localhost:5001/api/book/', {
+            fetch('http://localhost:8080/api/book/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newBook)
@@ -104,7 +104,7 @@ function DNLViewModel() {
             
             // Ensure bookInventory synced with database
             setTimeout(() => {
-                fetch('https://localhost:5001/api/books/')
+                fetch('http://localhost:8080/api/books/')
                     .then(response => response.json())
                     .then(data => self.bookInventory(data));
             }, updateDelay)
@@ -167,7 +167,7 @@ function DNLViewModel() {
             "publishDate": self.editDate()
         }
         
-        fetch('https://localhost:5001/api/book/' + idToUpdate + '/', {
+        fetch('http://localhost:8080/api/book/' + idToUpdate + '/', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updateBook)
@@ -186,7 +186,7 @@ function DNLViewModel() {
 
         // Ensure bookInventory synced with database
         setTimeout(() => {
-            fetch('https://localhost:5001/api/books/')
+            fetch('http://localhost:8080/api/books/')
                 .then(response => response.json())
                 .then(data => self.bookInventory(data));
         }, updateDelay)

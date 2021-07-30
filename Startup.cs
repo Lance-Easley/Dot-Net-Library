@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DotNetLibrary.Data;
+using DotNetLibrary.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,11 +24,18 @@ namespace DotNetLibrary
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var server = Configuration["DBServer"] ?? "ms-sql-server";
+            var port = Configuration["DBPort"] ?? "1433";
+            var user = Configuration["DBUser"] ?? "sa";
+            var password = Configuration["DBPassword"] ?? "CoreLogicProjectSQL5267";
+            var bookDb = Configuration["DBBooks"] ?? "LibraryDB";
+            var logDb = Configuration["DBLogs"] ?? "LogsDB";
+
             services.AddDbContext<BookContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("BookConnection")));
+            ($"Server={server},{port};Initial Catalog={bookDb};User ID={user};Password={password}"));
 
             services.AddDbContext<LogContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("LogConnection")));
+            ($"Server={server},{port};Initial Catalog={logDb};User ID={user};Password={password}"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -76,6 +84,9 @@ namespace DotNetLibrary
             app.UseCors("AllowAllHeaders");
 
             app.UseAuthorization();
+
+            PrepLibraryDB.PrepLibrary(app);
+            PrepLogDB.PrepLog(app);
 
             app.UseEndpoints(endpoints =>
             {

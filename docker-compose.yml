@@ -1,0 +1,17 @@
+version: '3'
+services: 
+    ms-sql-server:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment: 
+            ACCEPT_EULA: "Y"
+            MSSQL_SA_PASSWORD: "CoreLogicProjectSQL5267"
+        ports: 
+            - "1433:1433"
+    dotnetlibrary:
+        build: .
+        environment: 
+            DBServer: "ms-sql-server"
+            DBUser: "sa"
+            DBPassword: "CoreLogicProjectSQL5267"
+        ports:
+            - "8080:80"
