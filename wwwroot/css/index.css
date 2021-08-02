@@ -12,32 +12,40 @@ input.error {
    color: red;
 }
 
-.title-row {
-   width: 15%;
+.item-list {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
 }
 
-.author-row {
-   width: 15%;
+.book-info {
+   margin: 1rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   width: 18rem;
 }
 
-.description-row {
-   width: 50%;
+.book-info h3, .book-info p {
+   margin: 0.5rem;
 }
 
-.date-row {
-   width: 15%;
+.center {
+   text-align: center;
 }
 
-.data-entry {
-   word-wrap: break-all;
+.interaction-buttons {
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
 }
 
-.header {
-   background-color: white;
-   position: sticky;
-   top: 0;
+.interaction-btn {
+   width: 49%;
+   margin-bottom: 0.25rem;
 }
 
-.book-table {
-   overflow-x: scroll;
+.add-book-btn {
+   margin-left: 1rem;
 }
