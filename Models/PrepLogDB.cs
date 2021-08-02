@@ -8,19 +8,21 @@ namespace DotNetLibrary.Models
 {
     public static class PrepLogDB
     {
-        public static void PrepLog(IApplicationBuilder app)
+        public static void PrepLog(IApplicationBuilder app, bool doMigrations)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<LogContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<LogContext>(), doMigrations);
             }
         }
 
-        public static void SeedData(LogContext context) 
+        public static void SeedData(LogContext context, bool doMigrations) 
         {
-            System.Console.WriteLine("Applying Logs Migrations...");
+            if (doMigrations) {
+                System.Console.WriteLine("Applying Logs Migrations...");
 
-            context.Database.Migrate();
+                context.Database.Migrate();
+            }
         }
     }
 }

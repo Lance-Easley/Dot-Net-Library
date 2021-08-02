@@ -13,5 +13,6 @@ services:
             DBServer: "ms-sql-server"
             DBUser: "sa"
             DBPassword: "CoreLogicProjectSQL5267"
+            DBMigrate: "n"
         ports:
             - "8080:80"

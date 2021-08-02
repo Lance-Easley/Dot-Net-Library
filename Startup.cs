@@ -85,8 +85,8 @@ namespace DotNetLibrary
 
             app.UseAuthorization();
 
-            PrepLibraryDB.PrepLibrary(app);
-            PrepLogDB.PrepLog(app);
+            PrepLibraryDB.PrepLibrary(app, Configuration["DBMigrate"] == "y");
+            PrepLogDB.PrepLog(app, Configuration["DBMigrate"] == "y");
 
             app.UseEndpoints(endpoints =>
             {

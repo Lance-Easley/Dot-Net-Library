@@ -8,19 +8,21 @@ namespace DotNetLibrary.Models
 {
     public static class PrepLibraryDB
     {
-        public static void PrepLibrary(IApplicationBuilder app)
+        public static void PrepLibrary(IApplicationBuilder app, bool doMigrations)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<BookContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<BookContext>(), doMigrations);
             }
         }
 
-        public static void SeedData(BookContext context) 
+        public static void SeedData(BookContext context, bool doMigrations) 
         {
-            System.Console.WriteLine("Applying Library Migrations...");
+            if (doMigrations) {
+                System.Console.WriteLine("Applying Library Migrations...");
 
-            context.Database.Migrate();
+                context.Database.Migrate();
+            }
         }
     }
 }
