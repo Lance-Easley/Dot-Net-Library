@@ -12,14 +12,16 @@ namespace DotNetLibrary.Models
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<BookContext>(), doMigrations);
+                SeedData(serviceScope.ServiceProvider.GetService<LibraryContext>(), doMigrations);
             }
         }
 
-        public static void SeedData(BookContext context, bool doMigrations) 
+        public static void SeedData(LibraryContext context, bool doMigrations) 
         {
             if (doMigrations) {
                 System.Console.WriteLine("Applying Library Migrations...");
+                System.Console.WriteLine("Application is likely to fail after migrations.");
+                System.Console.WriteLine("Be sure to relaunch without migrating to run.");
 
                 context.Database.Migrate();
             }

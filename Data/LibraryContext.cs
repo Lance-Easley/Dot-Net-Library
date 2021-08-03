@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DotNetLibrary.Data
 {
-    public class BookContext : DbContext
+    public class LibraryContext : DbContext
     {
-        public BookContext(DbContextOptions<BookContext> opt) : base(opt)
+        public LibraryContext(DbContextOptions<LibraryContext> opt) : base(opt)
         {
             
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Log> Logs { get; set; }
         
     }
 }

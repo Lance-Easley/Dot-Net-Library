@@ -5,15 +5,16 @@ using DotNetLibrary.Models;
 
 namespace DotNetLibrary.Data
 {
-    public class SqlBookRepo : IBookRepo
+    public class SqlLibraryRepo : ILibraryRepo
     {
-        private readonly BookContext _context;
+        private readonly LibraryContext _context;
 
-        public SqlBookRepo(BookContext context)
+        public SqlLibraryRepo(LibraryContext context)
         {
             _context = context;
         }
 
+        // Books
         public void CreateBook(Book book)
         {
             if (book == null) {
@@ -46,6 +47,31 @@ namespace DotNetLibrary.Data
         public void UpdateBook(Book book)
         {
             // Nothing
+        }
+
+        // Logs
+        public void CreateLog(Log log)
+        {
+            if (log == null) {
+                throw new ArgumentNullException(nameof(log));
+            }
+
+            _context.Logs.Add(log);
+        }
+
+        public void DeleteLog(Log log)
+        {
+            _context.Logs.Remove(log);
+        }
+
+        public IEnumerable<Log> GetAllLogs()
+        {
+            return _context.Logs.ToList();
+        }
+
+        public Log GetLogById(int id)
+        {
+            return _context.Logs.FirstOrDefault(p => p.Id == id);
         }
     }
 }

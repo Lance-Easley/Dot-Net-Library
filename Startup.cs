@@ -24,18 +24,14 @@ namespace DotNetLibrary
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DBServer"] ?? "ms-sql-server";
+            var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "1433";
-            var user = Configuration["DBUser"] ?? "sa";
-            var password = Configuration["DBPassword"] ?? "CoreLogicProjectSQL5267";
-            var bookDb = Configuration["DBBooks"] ?? "LibraryDB";
-            var logDb = Configuration["DBLogs"] ?? "LogsDB";
+            var user = Configuration["DBUser"] ?? "";
+            var password = Configuration["DBPassword"] ?? "";
+            var bookDb = Configuration["DBCatalog"] ?? "";
 
-            services.AddDbContext<BookContext>(opt => opt.UseSqlServer
+            services.AddDbContext<LibraryContext>(opt => opt.UseSqlServer
             ($"Server={server},{port};Initial Catalog={bookDb};User ID={user};Password={password}"));
-
-            services.AddDbContext<LogContext>(opt => opt.UseSqlServer
-            ($"Server={server},{port};Initial Catalog={logDb};User ID={user};Password={password}"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -45,8 +41,7 @@ namespace DotNetLibrary
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IBookRepo, SqlBookRepo>();
-            services.AddScoped<ILogRepo, SqlLogRepo>();
+            services.AddScoped<ILibraryRepo, SqlLibraryRepo>();
 
             services.AddCors(options =>
                 {
@@ -86,7 +81,6 @@ namespace DotNetLibrary
             app.UseAuthorization();
 
             PrepLibraryDB.PrepLibrary(app, Configuration["DBMigrate"] == "y");
-            PrepLogDB.PrepLog(app, Configuration["DBMigrate"] == "y");
 
             app.UseEndpoints(endpoints =>
             {

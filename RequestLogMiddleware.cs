@@ -21,13 +21,13 @@ namespace DotNetLibrary
             _mapper = mapper;
         }
 
-        public async Task Invoke(HttpContext context, ILogRepo repo)
+        public async Task Invoke(HttpContext context, ILibraryRepo repo)
         {
             await LogRequest(context, repo);
             await _next(context);
         }  
 
-        private async Task LogRequest(HttpContext context, ILogRepo repo)
+        private async Task LogRequest(HttpContext context, ILibraryRepo repo)
         {
             context.Request.EnableBuffering();
 
@@ -48,7 +48,6 @@ namespace DotNetLibrary
                 repo.CreateLog(logModel);
                 repo.SaveChanges();
             }
-
 
             context.Request.Body.Position = 0;
         }

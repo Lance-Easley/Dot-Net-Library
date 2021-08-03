@@ -5,6 +5,7 @@ using DotNetLibrary.Dtos;
 using DotNetLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+using System;
 
 namespace DotNetLibrary.Controllers
 {
@@ -13,15 +14,16 @@ namespace DotNetLibrary.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBookRepo _repository;
+        private readonly ILibraryRepo _repository;
         private readonly IMapper _mapper;
 
-        public BooksController(IBookRepo repository, IMapper mapper)    
+        public BooksController(ILibraryRepo repository, IMapper mapper)    
         {
             _repository = repository;
             _mapper = mapper;
         }
 
+        // Books
         //GET api/books
         [HttpGet("books")]
         public ActionResult <IEnumerable<BookReadDto>> GetAllBooks()
@@ -92,6 +94,16 @@ namespace DotNetLibrary.Controllers
             _repository.SaveChanges();
 
             return NoContent();
+        }
+
+        // Logs
+        //GET api/logs
+        [HttpGet("logs")]
+        public ActionResult <IEnumerable<LogReadDto>> GetAllLogs()
+        {
+            var logs = _repository.GetAllLogs();
+
+            return Ok(_mapper.Map<IEnumerable<LogReadDto>>(logs));
         }
     }
 }
