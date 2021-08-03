@@ -69,7 +69,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-form" data-bind="submit: handleAddSubmit">
+                    <form id="add-form" data-bind="submit: handleAddSubmit" autocomplete="off">
                         <div class="form-group">
                             <label for="new-book-title" class="col-form-label">Title<span class="red">*</span></label>
                             <input type="text" class="form-control" id="new-book-title" data-bind="value: title, css: { error: title.error() && title.isModified() }, css: { error: title.error() && title.isModified() }">
@@ -107,7 +107,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit-form" data-bind="submit: handleEditSubmit">
+                    <form id="edit-form" data-bind="submit: handleEditSubmit" autocomplete="off">
                         <div class="form-group">
                             <label for="edit-book-title" class="col-form-label">Title<span class="red">*</span></label>
                             <input type="text" class="form-control" id="edit-book-title" data-bind="value: editTitle, css: { error: editTitle.error() && editTitle.isModified() }">
