@@ -66,7 +66,9 @@ namespace DotNetLibrary.Data
 
         public IEnumerable<Log> GetAllLogs()
         {
-            return _context.Logs.ToList();
+            var logs = _context.Logs.ToList();
+
+            return logs.Reverse<Log>();
         }
 
         public Log GetLogById(int id)
