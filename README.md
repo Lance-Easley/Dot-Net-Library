@@ -7,12 +7,14 @@ For more details about the project's requirements and life-cycle, view *Proposal
 
 ## Usage
 
-For now, the project only runs locally, along with a local Microsoft SQL Server (Database Connection can easily change).
-Once a SQL server is running, you can run the project by navigating to the folder in a terminal and running `dotnet run`.
-After that, the API boots up and will respond to HTTP requests.
+This project is ran through a docker-compose configuration. 
+The images required are the [dotnetlibrary image](https://hub.docker.com/repository/docker/techmine20/dotnetlibrary) and the [Microsoft SQL image](https://hub.docker.com/_/microsoft-mssql-server). 
+When using a fresh mssql container, make sure that dotnetlibrary's `DBMigrate` variable is set to `"y"`.
+After that, you can get rid of `DBMigrate`.
+After composing and running the application, the API boots up and will respond to HTTP requests.
 
 For a user-friendly interaction with the API, navigate to the base URL. 
-You will be greeted with a list of all books and buttons to interact with the books.
+You will be greeted with a list of all books and buttons to interact with each book.
 
 All interactions with the API are logged to a database table. 
 To view these logs, click on `Logs` in the navbar.
