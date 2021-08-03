@@ -17,6 +17,6 @@ You will be greeted with a list of all books and buttons to interact with the bo
 All interactions with the API are logged to a database table. 
 To view these logs, click on `Logs` in the navbar.
 The logs page contains a list of all log entries.
-To filter through all the logs, the navbar has a `filter` dropdown, which allows you to select only the log methods you want to see.
+To filter through all the logs, toggle the checkboxes on the left-hand side, which allows you to select only the log methods you want to see.
 
 To go back to the list of books, simply click on `Books` in the navbar.
