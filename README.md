@@ -10,7 +10,9 @@ For more details about the project's requirements and life-cycle, view *Proposal
 This project is ran through a docker-compose configuration. 
 The images required are the [dotnetlibrary image](https://hub.docker.com/repository/docker/techmine20/dotnetlibrary) and the [Microsoft SQL image](https://hub.docker.com/_/microsoft-mssql-server). 
 When using a fresh mssql container, make sure that dotnetlibrary's `DBMigrate` variable is set to `"y"`.
-After that, you can get rid of `DBMigrate`.
+This is all done through the [docker-compose.yml](https://github.com/Lance-Easley/Dot-Net-Library/blob/master/docker-compose.yml) file.
+If you don't care about the code, simply copy the docker-compose.yml file and run it with `docker-compose up`.
+
 After composing and running the application, the API boots up and will respond to HTTP requests.
 
 For a user-friendly interaction with the API, navigate to the base URL. 
@@ -22,3 +24,6 @@ The logs page contains a list of all log entries.
 To filter through all the logs, toggle the checkboxes on the left-hand side, which allows you to select only the log methods you want to see.
 
 To go back to the list of books, simply click on `Books` in the navbar.
+
+At the moment, running `docker-compose up` will pull the project's image from docker hub.
+If you wish to use the repository's code instead, replace `image: techmine20/dotnetlibrary` with `build: .`.
