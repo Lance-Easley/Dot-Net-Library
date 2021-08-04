@@ -20,8 +20,8 @@ namespace DotNetLibrary.Models
         {
             if (doMigrations) {
                 System.Console.WriteLine("Applying Library Migrations...");
-                System.Console.WriteLine("Application is likely to fail after migrations.");
-                System.Console.WriteLine("Be sure to relaunch without migrating to run.");
+                System.Console.WriteLine("Application is known to fail after migrations.");
+                System.Console.WriteLine("It is advised to only migrate when moving to a new or cleared database.");
 
                 context.Database.Migrate();
             }

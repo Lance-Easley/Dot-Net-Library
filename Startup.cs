@@ -64,12 +64,12 @@ namespace DotNetLibrary
 
             app.UseAuthorization();
 
-            PrepLibraryDB.PrepLibrary(app, Configuration["DBMigrate"] == "y");
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            PrepLibraryDB.PrepLibrary(app, Configuration["DBMigrate"] == "y");
         }
     }
 }
