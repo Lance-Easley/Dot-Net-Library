@@ -11,7 +11,7 @@ services:
         volumes: 
             - db-data:/var/opt/mssql/data
     dotnetlibrary:
-        build: .
+        image: techmine20/dotnetlibrary
         environment: 
             DBServer: "ms-sql-server"
             DBUser: "sa"
