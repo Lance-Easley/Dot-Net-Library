@@ -59,9 +59,7 @@ namespace DotNetLibrary
             app.UseStaticFiles();
 
             app.UseRequestResponseLogging();
-
-            app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
