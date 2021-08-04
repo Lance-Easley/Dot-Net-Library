@@ -2,11 +2,14 @@ version: '3'
 services: 
     ms-sql-server:
         image: mcr.microsoft.com/mssql/server:2019-latest
+        user: root
         environment: 
             ACCEPT_EULA: "Y"
             MSSQL_SA_PASSWORD: "CoreLogicProjectSQL5267"
         ports: 
             - "1433:1433"
+        volumes: 
+            - db-data:/var/opt/mssql/data
     dotnetlibrary:
         build: .
         environment: 
@@ -14,6 +17,8 @@ services:
             DBUser: "sa"
             DBPassword: "CoreLogicProjectSQL5267"
             DBCatalog: "LibraryDB"
-            DBMigrate: "n"
+            DBMigrate: "y"
         ports:
             - "8080:80"
+volumes: 
+    db-data:
