@@ -4,12 +4,9 @@ using DotNetLibrary.Data;
 using DotNetLibrary.Dtos;
 using DotNetLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Cors;
-using System;
 
 namespace DotNetLibrary.Controllers
 {
-    [EnableCors("AllowAllHeaders")]
     [Route("api")]
     [ApiController]
     public class BooksController : ControllerBase

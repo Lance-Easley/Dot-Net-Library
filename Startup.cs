@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DotNetLibrary.Data;
 using DotNetLibrary.Models;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +23,7 @@ namespace DotNetLibrary
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Environment Variables
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "1433";
             var user = Configuration["DBUser"] ?? "";
@@ -42,18 +42,6 @@ namespace DotNetLibrary
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ILibraryRepo, SqlLibraryRepo>();
-
-            services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowAllHeaders",
-                            builder =>
-                        {
-                                builder.AllowAnyOrigin()
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-                            });
-                });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,8 +63,6 @@ namespace DotNetLibrary
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseCors("AllowAllHeaders");
 
             app.UseAuthorization();
 
