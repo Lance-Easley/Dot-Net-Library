@@ -143,7 +143,15 @@ function DNLViewModel() {
     self.editDate = ko.observable("")
 
     self.editFormFilled = ko.computed(function() {
-        return self.editTitle().length > 0 && self.editAuthor().length > 0 && self.editDescription().length > 0 && self.editDate().length == 10
+        let greaterThanLengths = self.editTitle().length > 0 && self.editAuthor().length > 0 && self.editDescription().length > 0
+        let lessThanLengths = self.editTitle().length < 100 && self.editAuthor().length < 50 && self.editDescription().length < 250
+
+        console.log(greaterThanLengths)
+        console.log(lessThanLengths)
+
+        console.log("return " + greaterThanLengths && self.editDate().length == 10 && lessThanLengths)
+
+        return greaterThanLengths && self.editDate().length == 10 && lessThanLengths
     })
     
     self.editBook = function(data, event) {

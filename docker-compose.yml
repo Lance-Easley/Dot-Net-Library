@@ -17,7 +17,7 @@ services:
             DBUser: "sa"
             DBPassword: "CoreLogicProjectSQL5267"
             DBCatalog: "LibraryDB"
-            DBMigrate: "y"
+            DBMigrate: "n"
         ports:
             - "8080:80"
 volumes: 
